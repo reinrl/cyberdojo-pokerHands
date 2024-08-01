@@ -14,8 +14,13 @@ const {
 const {
   breakAHighCardTie,
   breakAPairTie,
+  breakTwoPairsTie,
   breakAThreeOfAKindTie,
+  breakStraightTie,
+  breakFlushTie,
+  breakFullHouseTie,
   breakAFourOfAKindTie,
+  breakStraightFlushTie,
 } = require("./tieBreakers");
 
 ///////////////////////////
@@ -57,7 +62,7 @@ const rankedHands = [
     name: "two pairs",
     value: "twoPairs",
     handScoringFunc: isTwoPairs,
-    tieBreakerFunc: () => {},
+    tieBreakerFunc: breakTwoPairsTie,
   },
   {
     name: "three of a kind",
@@ -69,19 +74,19 @@ const rankedHands = [
     name: "straight",
     value: "straight",
     handScoringFunc: isStraight,
-    tieBreakerFunc: () => {},
+    tieBreakerFunc: breakStraightTie,
   },
   {
     name: "flush",
     value: "flush",
     handScoringFunc: isFlush,
-    tieBreakerFunc: () => {},
+    tieBreakerFunc: breakFlushTie,
   },
   {
     name: "full house",
     value: "fullHouse",
     handScoringFunc: isFullHouse,
-    tieBreakerFunc: () => {},
+    tieBreakerFunc: breakFullHouseTie,
   },
   {
     name: "four of a kind",
@@ -93,7 +98,7 @@ const rankedHands = [
     name: "straight flush",
     value: "straightFlush",
     handScoringFunc: isStraightFlush,
-    tieBreakerFunc: () => {},
+    tieBreakerFunc: breakStraightFlushTie,
   },
 ];
 

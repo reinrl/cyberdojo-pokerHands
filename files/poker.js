@@ -122,10 +122,6 @@ function playTheHands(rawInput) {
   // turn the rigid-but-string-based input into an object that we can reason about
   const hands = parseHands(rawInput);
 
-  
-  console.log("hands.black.score:", hands.black.score);
-  console.log("hands.white.score:", hands.white.score);
-
   // figure out which hand won
   if (hands.black.score === hands.white.score) {
     // TODO: tying hands still gives us fits...

@@ -99,6 +99,9 @@ const breakAPairTie = (hands, rankedCards) => {
   }
 };
 
+// Hands with the same highest pair are ranked by the value of their other pair. If these values are the same the hands are ranked by the value of the remaining card.
+const breakTwoPairsTie = (hands, rankedCards) => {};
+
 // Hands which both contain three of a kind are ranked by the value of the 3 cards.
 const breakAThreeOfAKindTie = (hands, rankedCards) => {
   const { rankedBlackCard, rankedWhiteCard } = getNoteworthyCard(
@@ -110,6 +113,15 @@ const breakAThreeOfAKindTie = (hands, rankedCards) => {
     ? `Black wins - three of a kind with high card: ${rankedCards[rankedBlackCard].name}`
     : `White wins - three of a kind with high card: ${rankedCards[rankedWhiteCard].name}`;
 };
+
+// Hands which both contain a straight are ranked by their highest card.
+const breakStraightTie = (hands, rankedCards) => {};
+
+// Hands which are both flushes are ranked using the rules for High Card.
+const breakFlushTie = (hands, rankedCards) => {};
+
+// Ranked by the value of the 3 cards.
+const breakFullHouseTie = (hands, rankedCards) => {};
 
 // Hands which both contain four of a kind are ranked by the value of the 4 cards.
 const breakAFourOfAKindTie = (hands, rankedCards) => {
@@ -123,9 +135,17 @@ const breakAFourOfAKindTie = (hands, rankedCards) => {
     : `White wins - four of a kind with high card: ${rankedCards[rankedWhiteCard].name}`;
 };
 
+// Ranked by the highest card in the hand.
+const breakStraightFlushTie = (hands, rankedCards) => {};
+
 module.exports = {
   breakAHighCardTie,
   breakAPairTie,
+  breakTwoPairsTie,
   breakAThreeOfAKindTie,
+  breakStraightTie,
+  breakFlushTie,
+  breakFullHouseTie,
   breakAFourOfAKindTie,
+  breakStraightFlushTie,
 };
