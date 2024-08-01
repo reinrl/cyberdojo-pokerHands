@@ -109,6 +109,10 @@ describe("handCheckers", () => {
       ).toBe(false);
     });
 
+    it("should return false if the hand has two pairs instead", () => {
+      expect(isThreeOfAKind(twoPairsHand, ["2", "7", "9"], rankedCards)).toBe(false);
+    });
+
     it("should return true if the hand has three of a kind", () => {
       expect(
         isThreeOfAKind(threeOfAKindHand, ["2", "7", "9"], rankedCards)
@@ -163,6 +167,12 @@ describe("handCheckers", () => {
       expect(
         isFourOfAKind(highCardHand, ["2", "3", "7", "8", "9"], rankedCards)
       ).toBe(false);
+    });
+
+    it("should return false if the hand has a full house instead", () => {
+      expect(isFourOfAKind(fullHouseHand, ["2", "7"], rankedCards)).toBe(
+        false
+      );
     });
 
     it("should return true if the hand has four of a kind", () => {
