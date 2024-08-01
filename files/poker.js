@@ -90,11 +90,12 @@ function playTheHands(rawInput) {
   // turn the rigid-but-string-based input into an object that we can reason about
   const hands = parseHands(rawInput);
 
-  // figure out which hand won
+  // If they hands are of the same type, then we need a tie-break
   if (hands.black.score === hands.white.score) {
-    // TODO: tying hands still gives us fits...
     return rankedHands[hands.black.score].tieBreakerFunc(hands, rankedCards);
-  } else {
+  }
+  // we already have a clear winner
+  else {
     const winningHand =
       hands.black.score > hands.white.score ? hands.black : hands.white;
 

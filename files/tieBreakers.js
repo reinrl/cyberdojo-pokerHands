@@ -124,7 +124,9 @@ const breakAPairTie = (hands, rankedCards) => {
 };
 
 // Hands with the same highest pair are ranked by the value of their other pair. If these values are the same the hands are ranked by the value of the remaining card.
-const breakTwoPairsTie = (hands, rankedCards) => {};
+const breakTwoPairsTie = (hands, rankedCards) =>
+  // TODO: tying hands here still haven't been implemented yet...
+  {};
 
 // Hands which both contain three of a kind are ranked by the value of the 3 cards.
 const breakAThreeOfAKindTie = (hands, rankedCards) => {
@@ -171,7 +173,9 @@ const breakFlushTie = (hands, rankedCards) => {
 };
 
 // Ranked by the value of the 3 cards.
-const breakFullHouseTie = (hands, rankedCards) => {};
+const breakFullHouseTie = (hands, rankedCards) =>
+  // TODO: tying hands here still haven't been implemented yet...
+  {};
 
 // Hands which both contain four of a kind are ranked by the value of the 4 cards.
 const breakAFourOfAKindTie = (hands, rankedCards) => {
