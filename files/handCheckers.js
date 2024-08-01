@@ -3,12 +3,12 @@
 ////////////////////////////////////////////////
 
 // 2 of the 5 cards in the hand have the same value
-const isPair = (hand, uniqueCardValues, _rankedCards) => 
+const isPair = (_hand, uniqueCardValues, _rankedCards) => 
     // a hand capable of two pairs can only have four unique cards in it (and we already know this wasn't any of the better hands)
     uniqueCardValues.length === 4;
   
   // The hand contains 2 different pairs
-  const isTwoPairs = (hand, uniqueCardValues, _rankedCards) => 
+  const isTwoPairs = (_hand, uniqueCardValues, _rankedCards) => 
     // a hand capable of two pairs can only have three unique cards in it (and we already know this wasn't any of the better hands)
     uniqueCardValues.length === 3;
   
@@ -27,7 +27,7 @@ const isPair = (hand, uniqueCardValues, _rankedCards) =>
   };
   
   // Hand contains 5 cards with consecutive values
-  const isStraight = (hand, uniqueCardValues, rankedCards) => {
+  const isStraight = (hand, _uniqueCardValues, rankedCards) => {
     const firstIndex = rankedCards.findIndex((card) => card.value === hand[0].value);
     const secondIndex = rankedCards.findIndex((card) => card.value === hand[4].value);
     // if this is a straight, the ranked values should only be 5 numbers apart
@@ -35,7 +35,7 @@ const isPair = (hand, uniqueCardValues, _rankedCards) =>
   };
   
   // Hand contains 5 cards of the same suit
-  const isFlush = (hand, uniqueCardValues, _rankedCards) => 
+  const isFlush = (hand, _uniqueCardValues, _rankedCards) => 
     hand
       // figure out the suits involved
       .map((card) => card.suit)
@@ -45,7 +45,7 @@ const isPair = (hand, uniqueCardValues, _rankedCards) =>
       .length === 1;
   
   // 3 cards of the same value, with the remaining 2 cards forming a pair
-  const isFullHouse = (hand, uniqueCardValues, _rankedCards) => 
+  const isFullHouse = (_hand, uniqueCardValues, _rankedCards) => 
     // a hand capable of a full house can only have two unique cards in it (and we already know this wasn't four of a kind)
     uniqueCardValues.length < 3;
   
