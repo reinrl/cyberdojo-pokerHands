@@ -24,8 +24,8 @@ function parseHands(rawInput) {
       .slice(1)
       // separate the suit and value into distinct entities
       .map((card) => ({
-        suit: card[1],
-        value: card[0],
+        suit: card[card.length - 1],
+        value: card.substring(0, card.length - 1),
       }))
       // sort the cards in ascending value order (for later hand ranking)
       .sort((a, b) => {
@@ -80,38 +80,6 @@ function parseHands(rawInput) {
     black: { cards: blackHand, name: "Black", score: scoreHand(blackHand) },
     white: { cards: whiteHand, name: "White", score: scoreHand(whiteHand) },
   };
-}
-
-/////////////////////////////////////////
-// Figure out what we are working with //
-/////////////////////////////////////////
-function getWinnerByHighestCard(hands) {
-  let cardIdx = 4,
-    highestBlackCard,
-    highestWhiteCard;
-  do {
-    highestBlackCard = rankedCards.findIndex(
-      (rankedCard) => rankedCard.value === hands.black.cards[cardIdx].value
-    );
-    highestWhiteCard = rankedCards.findIndex(
-      (rankedCard) => rankedCard.value === hands.white.cards[cardIdx].value
-    );
-    if (highestBlackCard === highestWhiteCard) {
-      // we have a tie, keep going
-      cardIdx--;
-    } else {
-      // we have a clear winner, no need to continue
-      cardIdx = 0;
-    }
-  } while (cardIdx > 0);
-
-  if (highestBlackCard === highestWhiteCard) {
-    return "Tie";
-  } else {
-    return highestBlackCard > highestWhiteCard
-      ? `Black wins - high card: ${rankedCards[highestBlackCard].name}`
-      : `White wins - high card: ${rankedCards[highestWhiteCard].name}`;
-  }
 }
 
 ////////////////////////////////

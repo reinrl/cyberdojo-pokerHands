@@ -1,5 +1,23 @@
 "use strict";
 
+/////////////////////////////////
+// "private" utility functions //
+/////////////////////////////////
+const getHighestCard = (hands, rankedCards) => {
+  return {
+    highestBlackCard: rankedCards.findIndex(
+      (rankedCard) =>
+        rankedCard.value ===
+        hands.black.cards[hands.black.cards.length - 1].value
+    ),
+    highestWhiteCard: rankedCards.findIndex(
+      (rankedCard) =>
+        rankedCard.value ===
+        hands.white.cards[hands.white.cards.length - 1].value
+    ),
+  };
+};
+
 const getNoteworthyCard = (hands, rankedCards) => {
   const blackHandCard = hands.black.cards.filter((card, idx, a) =>
     a.some(
@@ -36,18 +54,23 @@ const removeDuplicateCards = (cards) => {
   });
 };
 
+//////////////////////////////////////
+// "exported" tie breaker functions //
+//////////////////////////////////////
+
 // Hands which do not fit any higher category are ranked by the value of their highest card. If the highest cards have the same value, the hands are ranked by the next highest, and so on.
 const breakAHighCardTie = (hands, rankedCards) => {
   let cardIdx = 4,
     highestBlackCard,
     highestWhiteCard;
   do {
-    highestBlackCard = rankedCards.findIndex(
-      (rankedCard) => rankedCard.value === hands.black.cards[cardIdx].value
-    );
-    highestWhiteCard = rankedCards.findIndex(
-      (rankedCard) => rankedCard.value === hands.white.cards[cardIdx].value
-    );
+    ({ highestBlackCard, highestWhiteCard } = getHighestCard(
+      {
+        black: { cards: hands.black.cards.slice(0, cardIdx + 1) },
+        white: { cards: hands.white.cards.slice(0, cardIdx + 1) },
+      },
+      rankedCards
+    ));
     if (highestBlackCard === highestWhiteCard) {
       // we have a tie, keep going
       cardIdx--;
@@ -75,12 +98,13 @@ const breakAPairTie = (hands, rankedCards) => {
     highestBlackCard,
     highestWhiteCard;
   do {
-    highestBlackCard = rankedCards.findIndex(
-      (rankedCard) => rankedCard.value === blackHandWithoutPair[cardIdx].value
-    );
-    highestWhiteCard = rankedCards.findIndex(
-      (rankedCard) => rankedCard.value === whiteHandWithoutPair[cardIdx].value
-    );
+    ({ highestBlackCard, highestWhiteCard } = getHighestCard(
+      {
+        black: { cards: blackHandWithoutPair },
+        white: { cards: whiteHandWithoutPair },
+      },
+      rankedCards
+    ));
     if (highestBlackCard === highestWhiteCard) {
       // we have a tie, keep going
       cardIdx--;
@@ -115,10 +139,36 @@ const breakAThreeOfAKindTie = (hands, rankedCards) => {
 };
 
 // Hands which both contain a straight are ranked by their highest card.
-const breakStraightTie = (hands, rankedCards) => {};
+const breakStraightTie = (hands, rankedCards) => {
+  const { highestBlackCard, highestWhiteCard } = getHighestCard(
+    hands,
+    rankedCards
+  );
+
+  if (highestBlackCard === highestWhiteCard) {
+    return "Tie";
+  } else {
+    return highestBlackCard > highestWhiteCard
+      ? `Black wins - straight with high card: ${rankedCards[highestBlackCard].name}`
+      : `White wins - straight with high card: ${rankedCards[highestWhiteCard].name}`;
+  }
+};
 
 // Hands which are both flushes are ranked using the rules for High Card.
-const breakFlushTie = (hands, rankedCards) => {};
+const breakFlushTie = (hands, rankedCards) => {
+  const { highestBlackCard, highestWhiteCard } = getHighestCard(
+    hands,
+    rankedCards
+  );
+
+  if (highestBlackCard === highestWhiteCard) {
+    return "Tie";
+  } else {
+    return highestBlackCard > highestWhiteCard
+      ? `Black wins - flush with high card: ${rankedCards[highestBlackCard].name}`
+      : `White wins - flush with high card: ${rankedCards[highestWhiteCard].name}`;
+  }
+};
 
 // Ranked by the value of the 3 cards.
 const breakFullHouseTie = (hands, rankedCards) => {};
@@ -136,7 +186,20 @@ const breakAFourOfAKindTie = (hands, rankedCards) => {
 };
 
 // Ranked by the highest card in the hand.
-const breakStraightFlushTie = (hands, rankedCards) => {};
+const breakStraightFlushTie = (hands, rankedCards) => {
+  const { highestBlackCard, highestWhiteCard } = getHighestCard(
+    hands,
+    rankedCards
+  );
+
+  if (highestBlackCard === highestWhiteCard) {
+    return "Tie";
+  } else {
+    return highestBlackCard > highestWhiteCard
+      ? `Black wins - straight flush with high card: ${rankedCards[highestBlackCard].name}`
+      : `White wins - straight flush with high card: ${rankedCards[highestWhiteCard].name}`;
+  }
+};
 
 module.exports = {
   breakAHighCardTie,
