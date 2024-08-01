@@ -86,38 +86,24 @@ function parseHands(rawInput) {
 // Figure out what we are working with //
 /////////////////////////////////////////
 function getWinnerByHighestCard(hands) {
-  const getHighestCard = (hand) => {
-    let highestCardValue = -1;
-
-    hand.forEach((card) => {
-      let currentCardRank = rankedCards.findIndex(
-        (rankedCard) => rankedCard.value === card.value
-      );
-      highestCardValue =
-        currentCardRank > highestCardValue ? currentCardRank : highestCardValue;
-    });
-
-    return highestCardValue;
-  };
-
-  let numCardsLeftToCompare = 5;
-  let highestBlackCard = hands.black.cards[4].value;
-  let highestWhiteCard = hands.white.cards[4].value;
+  let cardIdx = 4,
+    highestBlackCard,
+    highestWhiteCard;
   do {
-    highestBlackCard = getHighestCard(
-      hands.black.cards.slice(0, numCardsLeftToCompare)
+    highestBlackCard = rankedCards.findIndex(
+      (rankedCard) => rankedCard.value === hands.black.cards[cardIdx].value
     );
-    highestWhiteCard = getHighestCard(
-      hands.white.cards.slice(0, numCardsLeftToCompare)
+    highestWhiteCard = rankedCards.findIndex(
+      (rankedCard) => rankedCard.value === hands.white.cards[cardIdx].value
     );
     if (highestBlackCard === highestWhiteCard) {
       // we have a tie, keep going
-      numCardsLeftToCompare--;
+      cardIdx--;
     } else {
       // we have a clear winner, no need to continue
-      numCardsLeftToCompare = 0;
+      cardIdx = 0;
     }
-  } while (numCardsLeftToCompare > 0);
+  } while (cardIdx > 0);
 
   if (highestBlackCard === highestWhiteCard) {
     return "Tie";
