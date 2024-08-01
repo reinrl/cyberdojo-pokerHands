@@ -122,17 +122,20 @@ function playTheHands(rawInput) {
   // turn the rigid-but-string-based input into an object that we can reason about
   const hands = parseHands(rawInput);
 
-  // figure out which hand won
-  // TODO: tying hands would still give us fits...
-  const winningHand =
-    hands.black.score > hands.white.score ? hands.black : hands.white;
+  
+  console.log("hands.black.score:", hands.black.score);
+  console.log("hands.white.score:", hands.white.score);
 
-  // somebody has a hand!
-  if (winningHand.score > 0) {
-    return `${winningHand.name} wins - ${rankedHands[winningHand.score].name}`;
+  // figure out which hand won
+  if (hands.black.score === hands.white.score) {
+    // TODO: tying hands still gives us fits...
+    return rankedHands[hands.black.score].tieBreakerFunc(hands, rankedCards);
   } else {
-    // if nothing else has tripped the win yet, we should find the winner via highest card:
-    return getWinnerByHighestCard(hands);
+    const winningHand =
+      hands.black.score > hands.white.score ? hands.black : hands.white;
+
+    // somebody has a hand!
+    return `${winningHand.name} wins - ${rankedHands[winningHand.score].name}`;
   }
 }
 

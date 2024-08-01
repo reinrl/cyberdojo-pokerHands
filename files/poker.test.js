@@ -87,9 +87,27 @@ describe("playTheHand", () => {
   });
   
   describe("tie breakers", () => {
-    it("should have next highest card - 9 - win when the highest card is tied", () => {
+    it("should show that black has next highest card - 9 - win when the highest card is tied", () => {
       expect(playTheHands("Black: 2H 3D 5S 9C KD White: 2C 3H 4S 8C KH")).toEqual(
         "Black wins - high card: 9"
+      );
+    });
+  
+    it("should show that black wins with pair and highest other card", () => {
+      expect(playTheHands(`Black: ${convertHand(pairHand)} White: 2S 2S 3H 4S 5S`)).toEqual(
+        "Black wins - pair with high card: 9"
+      );
+    });
+  
+    it("should show that white wins with a higher three of a kind", () => {
+      expect(playTheHands(`Black: ${convertHand(threeOfAKindHand)} White: 3C 3S 3H 4S 5S`)).toEqual(
+        "White wins - three of a kind with high card: 3"
+      );
+    });
+  
+    it("should show that white wins with a higher four of a kind", () => {
+      expect(playTheHands(`Black: ${convertHand(fourOfAKindHand)} White: 3H 3S 3C 3S 5S`)).toEqual(
+        "White wins - four of a kind with high card: 3"
       );
     });
   });
