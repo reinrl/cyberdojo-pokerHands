@@ -1,6 +1,25 @@
 "use strict";
 
+// sample card hands
+const {
+    highCardHand,
+    pairHand,
+    twoPairsHand,
+    threeOfAKindHand,
+    straightHand,
+    flushHand,
+    fullHouseHand,
+    fourOfAKindHand,
+    straightFlushHand,
+  } = require("./__testutils__/testHands");
+
+// object under test
 const playTheHands = require("./poker");
+
+// convert sample hand to the form we are expecting
+const convertHand = (hand) => {
+    return hand.map((card) => `${card.value}${card.suit}`).join(" ");
+};
 
 describe("playTheHand", () => {
   describe("ties", () => {
@@ -19,49 +38,49 @@ describe("playTheHand", () => {
     });
   
     it("should win with pair", () => {
-      expect(playTheHands("Black: 2D 2H 3S 5C 7D White: 2S 8S AH QS 3S")).toEqual(
+      expect(playTheHands(`Black: ${convertHand(pairHand)} White: 2S 8S AH QS 3S`)).toEqual(
         "Black wins - pair"
       );
     });
   
     it("should win with two pair", () => {
-      expect(playTheHands("Black: 2D 2H 7S 5C 7D White: 2S 8S AH QS 3S")).toEqual(
+      expect(playTheHands(`Black: ${convertHand(twoPairsHand)} White: 2S 8S AH QS 3S`)).toEqual(
         "Black wins - two pairs"
       );
     });
   
     it("should win with three of a kind", () => {
-      expect(playTheHands("Black: 2D 2H 2S 5C 7D White: 2S 8S AH QS 3S")).toEqual(
+      expect(playTheHands(`Black: ${convertHand(threeOfAKindHand)} White: 2S 8S AH QS 3S`)).toEqual(
         "Black wins - three of a kind"
       );
     });
   
     it("should win with straight", () => {
-      expect(playTheHands("Black: 2D 3D 4D 5D 6H White: 2S 8S AH QS 3S")).toEqual(
+      expect(playTheHands(`Black: ${convertHand(straightHand)} White: 2S 8S AH QS 3S`)).toEqual(
         "Black wins - straight"
       );
     });
   
     it("should win with flush", () => {
-      expect(playTheHands("Black: 2D 3D 4D 5D 7D White: 2S 8S AH QS 3S")).toEqual(
+      expect(playTheHands(`Black: ${convertHand(flushHand)} White: 2S 8S AH QS 3S`)).toEqual(
         "Black wins - flush"
       );
     });
   
     it("should win with full house", () => {
-      expect(playTheHands("Black: 2H 4S 4C 2D 4H White: 2S 8S AS QS 3S")).toEqual(
+      expect(playTheHands(`Black: ${convertHand(fullHouseHand)} White: 2S 8S AS QS 3S`)).toEqual(
         "Black wins - full house"
       );
     });
   
     it("should win with four of a kind", () => {
-      expect(playTheHands("Black: 2D 2H 2S 2C 7D White: 2S 8S AH QS 3S")).toEqual(
+      expect(playTheHands(`Black: ${convertHand(fourOfAKindHand)} White: 2S 8S AH QS 3S`)).toEqual(
         "Black wins - four of a kind"
       );
     });
   
     it("should win with straight flush", () => {
-      expect(playTheHands("Black: 2D 3D 4D 5D 6D White: 2S 8S AH QS 3S")).toEqual(
+      expect(playTheHands(`Black: ${convertHand(straightFlushHand)} White: 2S 8S AH QS 3S`)).toEqual(
         "Black wins - straight flush"
       );
     });
