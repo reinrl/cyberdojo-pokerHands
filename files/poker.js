@@ -51,16 +51,13 @@ function parseHands(rawInput) {
       }
     }
 
-    return { rating, score };
+    return { cards, rating, score };
   };
 
   // NOTE: we are going to assume that the raw hands come in as ["#S #S #S #S #S", "#S #S #S #S #S"]
-  const blackHand = parseHand(rawInput[0]);
-  const whiteHand = parseHand(rawInput[1]);
-
   return {
-    black: { cards: blackHand, id: 1, ...rateHand(blackHand) },
-    white: { cards: whiteHand, id: 2, ...rateHand(whiteHand) },
+    black: { id: 1, ...rateHand(parseHand(rawInput[0])) },
+    white: { id: 2, ...rateHand(parseHand(rawInput[1])) },
   };
 }
 
