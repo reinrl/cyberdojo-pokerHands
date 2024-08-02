@@ -27,46 +27,40 @@ function parseHands(rawInput) {
         return firstIndex - secondIndex;
       });
 
-  const scoreHand = (cards) => {
+  const rateHand = (cards) => {
     const getUniqueCardValues = (hand) =>
       hand
         // figure out the suits involved
         .map((card) => card.value)
         // ...and get a distinct list...
         .filter((card, idx, arr) => arr.indexOf(card) === idx);
-    let score = 0;
+    let rating = 0,
+      score = rankedHands[rankedHands.length - 1].baseScore;
 
     for (let idx = 0; idx < rankedHands.length; idx++) {
       // number of unique cards will matter for a few different hands, so let's just figure it out once
       const uniqueCardValues = getUniqueCardValues(cards);
       // because we look at the best hand first, any match is good enough for us
       if (
-        rankedHands[idx].handScoringFunc(
-          cards,
-          uniqueCardValues,
-          rankedCards
-        )
+        rankedHands[idx].handScoringFunc(cards, uniqueCardValues, rankedCards)
       ) {
         // this is the best hand we have, so we can stop looking
-        score = idx;
+        rating = idx;
+        score = rankedHands[idx].baseScore; // TODO: score is just the base so far - ultimately it will tell us more about the hand in the future
         break;
       }
     }
 
-    return score;
+    return { rating, score };
   };
 
   // NOTE: we are going to assume that the raw hands come in as ["#S #S #S #S #S", "#S #S #S #S #S"]
-  const blackHand = parseHand(
-    rawInput[0]
-  );
-  const whiteHand = parseHand(
-    rawInput[1]
-  );
+  const blackHand = parseHand(rawInput[0]);
+  const whiteHand = parseHand(rawInput[1]);
 
   return {
-    black: { cards: blackHand, id: 1, score: scoreHand(blackHand) },
-    white: { cards: whiteHand, id: 2, score: scoreHand(whiteHand) },
+    black: { cards: blackHand, id: 1, ...rateHand(blackHand) },
+    white: { cards: whiteHand, id: 2, ...rateHand(whiteHand) },
   };
 }
 
@@ -81,15 +75,17 @@ function playTheHands(rawInput) {
 
   // If they hands are of the same type, then we need a tie-break
   if (hands.black.score === hands.white.score) {
-    return rankedHands[hands.black.score].tieBreakerFunc(hands, rankedCards);
+    return rankedHands[hands.black.rating].tieBreakerFunc(hands, rankedCards);
   }
   // we already have a clear winner (lower index === better hand)
   else {
     const winningHand =
-      hands.black.score < hands.white.score ? hands.black : hands.white;
+      hands.black.score > hands.white.score ? hands.black : hands.white;
 
     // somebody has a hand!
-    return `Hand #${winningHand.id} wins - ${rankedHands[winningHand.score].name}`;
+    return `Hand #${winningHand.id} wins - ${
+      rankedHands[winningHand.rating].name
+    }`;
   }
 }
 
