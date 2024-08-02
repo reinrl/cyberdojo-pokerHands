@@ -24,13 +24,13 @@ const convertHand = (hand) => {
 describe("playTheHand", () => {
   describe("ties", () => {
     it("should be a high card tie", () => {
-      expect(playTheHands(["2H 3D 5S 9C KD", "2D 3H 5C 9S KH"])).toEqual("Tie");
+      expect(playTheHands(["2H 3D 5S 9C KD", "2D 3H 5C 9S KH"])).toEqual("Push");
     });
 
     it("should be a pair tie", () => {
       expect(
         playTheHands([`${convertHand(pairHand)}`, `${convertHand(pairHand)}`])
-      ).toEqual("Tie");
+      ).toEqual("Push");
     });
 
     it("should be a straight tie", () => {
@@ -39,13 +39,13 @@ describe("playTheHand", () => {
           `${convertHand(straightHand)}`,
           `${convertHand(straightHand)}`,
         ])
-      ).toEqual("Tie");
+      ).toEqual("Push");
     });
 
     it("should be a flush tie", () => {
       expect(
         playTheHands([`${convertHand(flushHand)}`, `${convertHand(flushHand)}`])
-      ).toEqual("Tie");
+      ).toEqual("Push");
     });
 
     it("should be a straight flush tie", () => {
@@ -54,7 +54,7 @@ describe("playTheHand", () => {
           `${convertHand(straightFlushHand)}`,
           `${convertHand(straightFlushHand)}`,
         ])
-      ).toEqual("Tie");
+      ).toEqual("Push");
     });
   });
 

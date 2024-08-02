@@ -81,7 +81,7 @@ const breakAHighCardTie = (hands, rankedCards) => {
   } while (cardIdx > 0);
 
   if (highestBlackCard === highestWhiteCard) {
-    return "Tie";
+    return "Push";
   } else {
     return highestBlackCard > highestWhiteCard
       ? `Hand #1 wins - high card: ${rankedCards[highestBlackCard].name}`
@@ -115,7 +115,7 @@ const breakAPairTie = (hands, rankedCards) => {
   } while (cardIdx > 0);
 
   if (highestBlackCard === highestWhiteCard) {
-    return "Tie";
+    return "Push";
   } else {
     return highestBlackCard > highestWhiteCard
       ? `Hand #1 wins - pair with high card: ${rankedCards[highestBlackCard].name}`
@@ -148,7 +148,7 @@ const breakStraightTie = (hands, rankedCards) => {
   );
 
   if (highestBlackCard === highestWhiteCard) {
-    return "Tie";
+    return "Push";
   } else {
     return highestBlackCard > highestWhiteCard
       ? `Hand #1 wins - straight with high card: ${rankedCards[highestBlackCard].name}`
@@ -164,7 +164,7 @@ const breakFlushTie = (hands, rankedCards) => {
   );
 
   if (highestBlackCard === highestWhiteCard) {
-    return "Tie";
+    return "Push";
   } else {
     return highestBlackCard > highestWhiteCard
       ? `Hand #1 wins - flush with high card: ${rankedCards[highestBlackCard].name}`
@@ -197,7 +197,7 @@ const breakStraightFlushTie = (hands, rankedCards) => {
   );
 
   if (highestBlackCard === highestWhiteCard) {
-    return "Tie";
+    return "Push";
   } else {
     return highestBlackCard > highestWhiteCard
       ? `Hand #1 wins - straight flush with high card: ${rankedCards[highestBlackCard].name}`
