@@ -86,6 +86,7 @@ function parseHands(rawInput) {
 // Time to do the actual work //
 ////////////////////////////////
 
+// TODO: This is all predicated on only two players - how bad does it get with more?
 function playTheHands(rawInput) {
   // turn the rigid-but-string-based input into an object that we can reason about
   const hands = parseHands(rawInput);
