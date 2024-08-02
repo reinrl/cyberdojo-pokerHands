@@ -47,46 +47,10 @@ const rankedCards = [
 // rank the hands to give them a relative value
 const rankedHands = [
   {
-    name: "high card",
-    value: "highCard",
-    handScoringFunc: () => true,
-    tieBreakerFunc: breakAHighCardTie,
-  },
-  {
-    name: "pair",
-    value: "pair",
-    handScoringFunc: isPair,
-    tieBreakerFunc: breakAPairTie,
-  },
-  {
-    name: "two pairs",
-    value: "twoPairs",
-    handScoringFunc: isTwoPairs,
-    tieBreakerFunc: breakTwoPairsTie,
-  },
-  {
-    name: "three of a kind",
-    value: "threeOfAKind",
-    handScoringFunc: isThreeOfAKind,
-    tieBreakerFunc: breakAThreeOfAKindTie,
-  },
-  {
-    name: "straight",
-    value: "straight",
-    handScoringFunc: isStraight,
-    tieBreakerFunc: breakStraightTie,
-  },
-  {
-    name: "flush",
-    value: "flush",
-    handScoringFunc: isFlush,
-    tieBreakerFunc: breakFlushTie,
-  },
-  {
-    name: "full house",
-    value: "fullHouse",
-    handScoringFunc: isFullHouse,
-    tieBreakerFunc: breakFullHouseTie,
+    name: "straight flush",
+    value: "straightFlush",
+    handScoringFunc: isStraightFlush,
+    tieBreakerFunc: breakStraightFlushTie,
   },
   {
     name: "four of a kind",
@@ -95,10 +59,46 @@ const rankedHands = [
     tieBreakerFunc: breakAFourOfAKindTie,
   },
   {
-    name: "straight flush",
-    value: "straightFlush",
-    handScoringFunc: isStraightFlush,
-    tieBreakerFunc: breakStraightFlushTie,
+    name: "full house",
+    value: "fullHouse",
+    handScoringFunc: isFullHouse,
+    tieBreakerFunc: breakFullHouseTie,
+  },
+  {
+    name: "flush",
+    value: "flush",
+    handScoringFunc: isFlush,
+    tieBreakerFunc: breakFlushTie,
+  },
+  {
+    name: "straight",
+    value: "straight",
+    handScoringFunc: isStraight,
+    tieBreakerFunc: breakStraightTie,
+  },
+  {
+    name: "three of a kind",
+    value: "threeOfAKind",
+    handScoringFunc: isThreeOfAKind,
+    tieBreakerFunc: breakAThreeOfAKindTie,
+  },
+  {
+    name: "two pairs",
+    value: "twoPairs",
+    handScoringFunc: isTwoPairs,
+    tieBreakerFunc: breakTwoPairsTie,
+  },
+  {
+    name: "pair",
+    value: "pair",
+    handScoringFunc: isPair,
+    tieBreakerFunc: breakAPairTie,
+  },
+  {
+    name: "high card",
+    value: "highCard",
+    handScoringFunc: () => true,
+    tieBreakerFunc: breakAHighCardTie,
   },
 ];
 

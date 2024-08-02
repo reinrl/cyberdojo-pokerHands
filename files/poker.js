@@ -34,22 +34,21 @@ function parseHands(rawInput) {
         .map((card) => card.value)
         // ...and get a distinct list...
         .filter((card, idx, arr) => arr.indexOf(card) === idx);
-    const handsInOrderOfImportance = rankedHands.slice().reverse();
     let score = 0;
 
-    for (let idx = 0; idx < handsInOrderOfImportance.length; idx++) {
+    for (let idx = 0; idx < rankedHands.length; idx++) {
       // number of unique cards will matter for a few different hands, so let's just figure it out once
       const uniqueCardValues = getUniqueCardValues(cards);
       // because we look at the best hand first, any match is good enough for us
       if (
-        handsInOrderOfImportance[idx].handScoringFunc(
+        rankedHands[idx].handScoringFunc(
           cards,
           uniqueCardValues,
           rankedCards
         )
       ) {
-        // we need to adjust the index to return because we reversed the order (checking for best hand first)
-        score = handsInOrderOfImportance.length - idx - 1;
+        // this is the best hand we have, so we can stop looking
+        score = idx;
         break;
       }
     }
@@ -84,10 +83,10 @@ function playTheHands(rawInput) {
   if (hands.black.score === hands.white.score) {
     return rankedHands[hands.black.score].tieBreakerFunc(hands, rankedCards);
   }
-  // we already have a clear winner
+  // we already have a clear winner (lower index === better hand)
   else {
     const winningHand =
-      hands.black.score > hands.white.score ? hands.black : hands.white;
+      hands.black.score < hands.white.score ? hands.black : hands.white;
 
     // somebody has a hand!
     return `${winningHand.name} wins - ${rankedHands[winningHand.score].name}`;
