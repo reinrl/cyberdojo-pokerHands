@@ -24,7 +24,9 @@ const convertHand = (hand) => {
 describe("playTheHand", () => {
   describe("ties", () => {
     it("should be a high card tie", () => {
-      expect(playTheHands(["2H 3D 5S 9C KD", "2D 3H 5C 9S KH"])).toEqual("Push");
+      expect(playTheHands(["2H 3D 5S 9C KD", "2D 3H 5C 9S KH"])).toEqual(
+        "Push"
+      );
     });
 
     it("should be a pair tie", () => {
@@ -287,6 +289,18 @@ describe("playTheHand", () => {
       expect(
         playTheHands(["3H 3S 3C 3S 5S", `${convertHand(fourOfAKindHand)}`])
       ).toEqual("Hand #1 wins - four of a kind with high card: 3");
+    });
+
+    it("should show that hand #2 wins with a higher full house", () => {
+      expect(
+        playTheHands([`${convertHand(fullHouseHand)}`, "6C 6D 4H 4D 4C"])
+      ).toEqual("Hand #2 wins - full house with high card: 4");
+    });
+
+    it("should show that hand #1 wins with a higher full house", () => {
+      expect(
+        playTheHands(["6C 6D 4H 4D 4C", `${convertHand(fullHouseHand)}`])
+      ).toEqual("Hand #1 wins - full house with high card: 4");
     });
 
     it("should show that hand #2 wins with a higher straight flush", () => {

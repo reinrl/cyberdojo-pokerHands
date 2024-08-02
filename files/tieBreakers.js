@@ -173,9 +173,34 @@ const breakFlushTie = (hands, rankedCards) => {
 };
 
 // Ranked by the value of the 3 cards.
-const breakFullHouseTie = (hands, rankedCards) =>
-  // TODO: tying hands here still haven't been implemented yet...
-  {};
+const breakFullHouseTie = (hands, rankedCards) => {
+  const countOccurrences = (arr) => {
+    const counter = new Map();
+    arr.forEach((card) => {
+      counter.set(
+        card.value,
+        counter.has(card.value) ? counter.get(card.value) + 1 : 1
+      );
+    });
+    // sort by occurence
+    return Array.from(counter).sort((a, b) => b[1] - a[1]);
+  };
+
+  const blackHandOccurrences = countOccurrences(hands.black.cards);
+  const whiteHandOccurrences = countOccurrences(hands.white.cards);
+
+  // looking at the value of the three of a kind portion of the hand is enough to break a tie
+  const rankedBlackCard = rankedCards.findIndex(
+    (rankedCard) => rankedCard.value === blackHandOccurrences[0][0]
+  );
+  const rankedWhiteCard = rankedCards.findIndex(
+    (rankedCard) => rankedCard.value === whiteHandOccurrences[0][0]
+  );
+
+  return rankedBlackCard > rankedWhiteCard
+    ? `Hand #1 wins - full house with high card: ${rankedCards[rankedBlackCard].name}`
+    : `Hand #2 wins - full house with high card: ${rankedCards[rankedWhiteCard].name}`;
+};
 
 // Hands which both contain four of a kind are ranked by the value of the 4 cards.
 const breakAFourOfAKindTie = (hands, rankedCards) => {
