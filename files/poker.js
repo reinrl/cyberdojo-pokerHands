@@ -27,7 +27,7 @@ function parseHands(rawInput) {
         return firstIndex - secondIndex;
       });
 
-  const rateHand = (cards) => {
+  const rateHand = (cards, id) => {
     const getUniqueCardValues = (hand) =>
       hand
         // figure out the suits involved
@@ -51,13 +51,13 @@ function parseHands(rawInput) {
       }
     }
 
-    return { cards, rating, score };
+    return { cards, id, rating, score };
   };
 
   // NOTE: we are going to assume that the raw hands come in as ["#S #S #S #S #S", "#S #S #S #S #S"]
   return {
-    black: { id: 1, ...rateHand(parseHand(rawInput[0])) },
-    white: { id: 2, ...rateHand(parseHand(rawInput[1])) },
+    black: rateHand(parseHand(rawInput[0]), 1),
+    white: rateHand(parseHand(rawInput[1]), 2),
   };
 }
 
