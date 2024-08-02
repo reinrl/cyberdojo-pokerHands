@@ -37,7 +37,7 @@ const rankedCards = [
   { value: "7", name: "7" },
   { value: "8", name: "8" },
   { value: "9", name: "9" },
-  { value: "10", name: "10" },
+  { value: "T", name: "10" },
   { value: "J", name: "Jack" },
   { value: "Q", name: "Queen" },
   { value: "K", name: "King" },

@@ -255,25 +255,25 @@ describe("playTheHand", () => {
 
     it("should show that white wins with a higher straight", () => {
       expect(
-        playTheHands([`${convertHand(straightHand)}`, "7D 8D 9H 10D JD"])
+        playTheHands([`${convertHand(straightHand)}`, "7D 8D 9H TD JD"])
       ).toEqual("Hand #2 wins - straight with high card: Jack");
     });
 
     it("should show that black wins with a higher straight", () => {
       expect(
-        playTheHands(["7D 8D 9H 10D JD", `${convertHand(straightHand)}`])
+        playTheHands(["7D 8D 9H TD JD", `${convertHand(straightHand)}`])
       ).toEqual("Hand #1 wins - straight with high card: Jack");
     });
 
     it("should show that white wins with a higher flush", () => {
       expect(
-        playTheHands([`${convertHand(flushHand)}`, "2H 3H 7H 8H 10H"])
+        playTheHands([`${convertHand(flushHand)}`, "2H 3H 7H 8H TH"])
       ).toEqual("Hand #2 wins - flush with high card: 10");
     });
 
     it("should show that black wins with a higher flush", () => {
       expect(
-        playTheHands(["2H 3H 7H 8H 10H", `${convertHand(flushHand)}`])
+        playTheHands(["2H 3H 7H 8H TH", `${convertHand(flushHand)}`])
       ).toEqual("Hand #1 wins - flush with high card: 10");
     });
 
@@ -291,13 +291,13 @@ describe("playTheHand", () => {
 
     it("should show that white wins with a higher straight flush", () => {
       expect(
-        playTheHands([`${convertHand(straightFlushHand)}`, "7D 8D 9D 10D JD"])
+        playTheHands([`${convertHand(straightFlushHand)}`, "7D 8D 9D TD JD"])
       ).toEqual("Hand #2 wins - straight flush with high card: Jack");
     });
 
     it("should show that black wins with a higher straight flush", () => {
       expect(
-        playTheHands(["7D 8D 9D 10D JD", `${convertHand(straightFlushHand)}`])
+        playTheHands(["7D 8D 9D TD JD", `${convertHand(straightFlushHand)}`])
       ).toEqual("Hand #1 wins - straight flush with high card: Jack");
     });
   });

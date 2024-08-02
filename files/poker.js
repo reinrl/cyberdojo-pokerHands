@@ -13,8 +13,8 @@ function parseHands(rawInput) {
       .split(" ")
       // separate the suit and value into distinct entities
       .map((card) => ({
-        suit: card[card.length - 1],
-        value: card.substring(0, card.length - 1),
+        suit: card[1],
+        value: card[0],
       }))
       // sort the cards in ascending value order (for later hand ranking)
       .sort((a, b) => {
