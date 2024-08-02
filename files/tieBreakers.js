@@ -84,8 +84,8 @@ const breakAHighCardTie = (hands, rankedCards) => {
     return "Tie";
   } else {
     return highestBlackCard > highestWhiteCard
-      ? `Black wins - high card: ${rankedCards[highestBlackCard].name}`
-      : `White wins - high card: ${rankedCards[highestWhiteCard].name}`;
+      ? `Hand #1 wins - high card: ${rankedCards[highestBlackCard].name}`
+      : `Hand #2 wins - high card: ${rankedCards[highestWhiteCard].name}`;
   }
 };
 
@@ -118,8 +118,8 @@ const breakAPairTie = (hands, rankedCards) => {
     return "Tie";
   } else {
     return highestBlackCard > highestWhiteCard
-      ? `Black wins - pair with high card: ${rankedCards[highestBlackCard].name}`
-      : `White wins - pair with high card: ${rankedCards[highestWhiteCard].name}`;
+      ? `Hand #1 wins - pair with high card: ${rankedCards[highestBlackCard].name}`
+      : `Hand #2 wins - pair with high card: ${rankedCards[highestWhiteCard].name}`;
   }
 };
 
@@ -136,8 +136,8 @@ const breakAThreeOfAKindTie = (hands, rankedCards) => {
   );
 
   return rankedBlackCard > rankedWhiteCard
-    ? `Black wins - three of a kind with high card: ${rankedCards[rankedBlackCard].name}`
-    : `White wins - three of a kind with high card: ${rankedCards[rankedWhiteCard].name}`;
+    ? `Hand #1 wins - three of a kind with high card: ${rankedCards[rankedBlackCard].name}`
+    : `Hand #2 wins - three of a kind with high card: ${rankedCards[rankedWhiteCard].name}`;
 };
 
 // Hands which both contain a straight are ranked by their highest card.
@@ -151,8 +151,8 @@ const breakStraightTie = (hands, rankedCards) => {
     return "Tie";
   } else {
     return highestBlackCard > highestWhiteCard
-      ? `Black wins - straight with high card: ${rankedCards[highestBlackCard].name}`
-      : `White wins - straight with high card: ${rankedCards[highestWhiteCard].name}`;
+      ? `Hand #1 wins - straight with high card: ${rankedCards[highestBlackCard].name}`
+      : `Hand #2 wins - straight with high card: ${rankedCards[highestWhiteCard].name}`;
   }
 };
 
@@ -167,8 +167,8 @@ const breakFlushTie = (hands, rankedCards) => {
     return "Tie";
   } else {
     return highestBlackCard > highestWhiteCard
-      ? `Black wins - flush with high card: ${rankedCards[highestBlackCard].name}`
-      : `White wins - flush with high card: ${rankedCards[highestWhiteCard].name}`;
+      ? `Hand #1 wins - flush with high card: ${rankedCards[highestBlackCard].name}`
+      : `Hand #2 wins - flush with high card: ${rankedCards[highestWhiteCard].name}`;
   }
 };
 
@@ -185,8 +185,8 @@ const breakAFourOfAKindTie = (hands, rankedCards) => {
   );
 
   return rankedBlackCard > rankedWhiteCard
-    ? `Black wins - four of a kind with high card: ${rankedCards[rankedBlackCard].name}`
-    : `White wins - four of a kind with high card: ${rankedCards[rankedWhiteCard].name}`;
+    ? `Hand #1 wins - four of a kind with high card: ${rankedCards[rankedBlackCard].name}`
+    : `Hand #2 wins - four of a kind with high card: ${rankedCards[rankedWhiteCard].name}`;
 };
 
 // Ranked by the highest card in the hand.
@@ -200,8 +200,8 @@ const breakStraightFlushTie = (hands, rankedCards) => {
     return "Tie";
   } else {
     return highestBlackCard > highestWhiteCard
-      ? `Black wins - straight flush with high card: ${rankedCards[highestBlackCard].name}`
-      : `White wins - straight flush with high card: ${rankedCards[highestWhiteCard].name}`;
+      ? `Hand #1 wins - straight flush with high card: ${rankedCards[highestBlackCard].name}`
+      : `Hand #2 wins - straight flush with high card: ${rankedCards[highestWhiteCard].name}`;
   }
 };
 

@@ -62,13 +62,13 @@ describe("playTheHand", () => {
     it("white should win with highest card - Ace", () => {
       expect(
         playTheHands([`${convertHand(highCardHand)}`, "2C 3H 4S 8C AH"])
-      ).toEqual("White wins - high card: Ace");
+      ).toEqual("Hand #2 wins - high card: Ace");
     });
 
     it("black should win with highest card - Ace", () => {
       expect(
         playTheHands(["2C 3H 4S 8C AH", `${convertHand(highCardHand)}`])
-      ).toEqual("Black wins - high card: Ace");
+      ).toEqual("Hand #1 wins - high card: Ace");
     });
 
     it("white should win with pair", () => {
@@ -77,7 +77,7 @@ describe("playTheHand", () => {
           `${convertHand(highCardHand)}`,
           `${convertHand(pairHand)}`,
         ])
-      ).toEqual("White wins - pair");
+      ).toEqual("Hand #2 wins - pair");
     });
 
     it("black should win with pair", () => {
@@ -86,7 +86,7 @@ describe("playTheHand", () => {
           `${convertHand(pairHand)}`,
           `${convertHand(highCardHand)}`,
         ])
-      ).toEqual("Black wins - pair");
+      ).toEqual("Hand #1 wins - pair");
     });
 
     it("white should win with two pair", () => {
@@ -95,7 +95,7 @@ describe("playTheHand", () => {
           `${convertHand(highCardHand)}`,
           `${convertHand(twoPairsHand)}`,
         ])
-      ).toEqual("White wins - two pairs");
+      ).toEqual("Hand #2 wins - two pairs");
     });
 
     it("black should win with two pair", () => {
@@ -104,7 +104,7 @@ describe("playTheHand", () => {
           `${convertHand(twoPairsHand)}`,
           `${convertHand(highCardHand)}`,
         ])
-      ).toEqual("Black wins - two pairs");
+      ).toEqual("Hand #1 wins - two pairs");
     });
 
     it("white should win with three of a kind", () => {
@@ -113,7 +113,7 @@ describe("playTheHand", () => {
           `${convertHand(highCardHand)}`,
           `${convertHand(threeOfAKindHand)}`,
         ])
-      ).toEqual("White wins - three of a kind");
+      ).toEqual("Hand #2 wins - three of a kind");
     });
 
     it("black should win with three of a kind", () => {
@@ -122,7 +122,7 @@ describe("playTheHand", () => {
           `${convertHand(threeOfAKindHand)}`,
           `${convertHand(highCardHand)}`,
         ])
-      ).toEqual("Black wins - three of a kind");
+      ).toEqual("Hand #1 wins - three of a kind");
     });
 
     it("white should win with straight", () => {
@@ -131,7 +131,7 @@ describe("playTheHand", () => {
           `${convertHand(highCardHand)}`,
           `${convertHand(straightHand)}`,
         ])
-      ).toEqual("White wins - straight");
+      ).toEqual("Hand #2 wins - straight");
     });
 
     it("black should win with straight", () => {
@@ -140,7 +140,7 @@ describe("playTheHand", () => {
           `${convertHand(straightHand)}`,
           `${convertHand(highCardHand)}`,
         ])
-      ).toEqual("Black wins - straight");
+      ).toEqual("Hand #1 wins - straight");
     });
 
     it("white should win with flush", () => {
@@ -149,7 +149,7 @@ describe("playTheHand", () => {
           `${convertHand(highCardHand)}`,
           `${convertHand(flushHand)}`,
         ])
-      ).toEqual("White wins - flush");
+      ).toEqual("Hand #2 wins - flush");
     });
 
     it("black should win with flush", () => {
@@ -158,7 +158,7 @@ describe("playTheHand", () => {
           `${convertHand(flushHand)}`,
           `${convertHand(highCardHand)}`,
         ])
-      ).toEqual("Black wins - flush");
+      ).toEqual("Hand #1 wins - flush");
     });
 
     it("white should win with full house", () => {
@@ -167,7 +167,7 @@ describe("playTheHand", () => {
           `${convertHand(highCardHand)}`,
           `${convertHand(fullHouseHand)}`,
         ])
-      ).toEqual("White wins - full house");
+      ).toEqual("Hand #2 wins - full house");
     });
 
     it("black should win with full house", () => {
@@ -176,7 +176,7 @@ describe("playTheHand", () => {
           `${convertHand(fullHouseHand)}`,
           `${convertHand(highCardHand)}`,
         ])
-      ).toEqual("Black wins - full house");
+      ).toEqual("Hand #1 wins - full house");
     });
 
     it("white should win with four of a kind", () => {
@@ -185,7 +185,7 @@ describe("playTheHand", () => {
           `${convertHand(highCardHand)}`,
           `${convertHand(fourOfAKindHand)}`,
         ])
-      ).toEqual("White wins - four of a kind");
+      ).toEqual("Hand #2 wins - four of a kind");
     });
 
     it("black should win with four of a kind", () => {
@@ -194,7 +194,7 @@ describe("playTheHand", () => {
           `${convertHand(fourOfAKindHand)}`,
           `${convertHand(highCardHand)}`,
         ])
-      ).toEqual("Black wins - four of a kind");
+      ).toEqual("Hand #1 wins - four of a kind");
     });
 
     it("white should win with straight flush", () => {
@@ -203,7 +203,7 @@ describe("playTheHand", () => {
           `${convertHand(highCardHand)}`,
           `${convertHand(straightFlushHand)}`,
         ])
-      ).toEqual("White wins - straight flush");
+      ).toEqual("Hand #2 wins - straight flush");
     });
 
     it("black should win with straight flush", () => {
@@ -212,93 +212,93 @@ describe("playTheHand", () => {
           `${convertHand(straightFlushHand)}`,
           `${convertHand(highCardHand)}`,
         ])
-      ).toEqual("Black wins - straight flush");
+      ).toEqual("Hand #1 wins - straight flush");
     });
   });
 
   describe("tie breakers", () => {
     it("should show that white has next highest card - 9 - win when the highest card is tied", () => {
       expect(playTheHands(["2C 3H 4S 8C KH", "2H 3D 5S 9C KD"])).toEqual(
-        "White wins - high card: 9"
+        "Hand #2 wins - high card: 9"
       );
     });
 
     it("should show that black has next highest card - 9 - win when the highest card is tied", () => {
       expect(playTheHands(["2H 3D 5S 9C KD", "2C 3H 4S 8C KH"])).toEqual(
-        "Black wins - high card: 9"
+        "Hand #1 wins - high card: 9"
       );
     });
 
     it("should show that white wins with pair and highest other card", () => {
       expect(
         playTheHands(["2S 2S 3H 4S 5S", `${convertHand(pairHand)}`])
-      ).toEqual("White wins - pair with high card: 9");
+      ).toEqual("Hand #2 wins - pair with high card: 9");
     });
 
     it("should show that black wins with pair and highest other card", () => {
       expect(
         playTheHands([`${convertHand(pairHand)}`, "2S 2S 3H 4S 5S"])
-      ).toEqual("Black wins - pair with high card: 9");
+      ).toEqual("Hand #1 wins - pair with high card: 9");
     });
 
     it("should show that white wins with a higher three of a kind", () => {
       expect(
         playTheHands([`${convertHand(threeOfAKindHand)}`, "3C 3S 3H 4S 5S"])
-      ).toEqual("White wins - three of a kind with high card: 3");
+      ).toEqual("Hand #2 wins - three of a kind with high card: 3");
     });
 
     it("should show that black wins with a higher three of a kind", () => {
       expect(
         playTheHands(["3C 3S 3H 4S 5S", `${convertHand(threeOfAKindHand)}`])
-      ).toEqual("Black wins - three of a kind with high card: 3");
+      ).toEqual("Hand #1 wins - three of a kind with high card: 3");
     });
 
     it("should show that white wins with a higher straight", () => {
       expect(
         playTheHands([`${convertHand(straightHand)}`, "7D 8D 9H 10D JD"])
-      ).toEqual("White wins - straight with high card: Jack");
+      ).toEqual("Hand #2 wins - straight with high card: Jack");
     });
 
     it("should show that black wins with a higher straight", () => {
       expect(
         playTheHands(["7D 8D 9H 10D JD", `${convertHand(straightHand)}`])
-      ).toEqual("Black wins - straight with high card: Jack");
+      ).toEqual("Hand #1 wins - straight with high card: Jack");
     });
 
     it("should show that white wins with a higher flush", () => {
       expect(
         playTheHands([`${convertHand(flushHand)}`, "2H 3H 7H 8H 10H"])
-      ).toEqual("White wins - flush with high card: 10");
+      ).toEqual("Hand #2 wins - flush with high card: 10");
     });
 
     it("should show that black wins with a higher flush", () => {
       expect(
         playTheHands(["2H 3H 7H 8H 10H", `${convertHand(flushHand)}`])
-      ).toEqual("Black wins - flush with high card: 10");
+      ).toEqual("Hand #1 wins - flush with high card: 10");
     });
 
     it("should show that white wins with a higher four of a kind", () => {
       expect(
         playTheHands([`${convertHand(fourOfAKindHand)}`, "3H 3S 3C 3S 5S"])
-      ).toEqual("White wins - four of a kind with high card: 3");
+      ).toEqual("Hand #2 wins - four of a kind with high card: 3");
     });
 
     it("should show that black wins with a higher four of a kind", () => {
       expect(
         playTheHands(["3H 3S 3C 3S 5S", `${convertHand(fourOfAKindHand)}`])
-      ).toEqual("Black wins - four of a kind with high card: 3");
+      ).toEqual("Hand #1 wins - four of a kind with high card: 3");
     });
 
     it("should show that white wins with a higher straight flush", () => {
       expect(
         playTheHands([`${convertHand(straightFlushHand)}`, "7D 8D 9D 10D JD"])
-      ).toEqual("White wins - straight flush with high card: Jack");
+      ).toEqual("Hand #2 wins - straight flush with high card: Jack");
     });
 
     it("should show that black wins with a higher straight flush", () => {
       expect(
         playTheHands(["7D 8D 9D 10D JD", `${convertHand(straightFlushHand)}`])
-      ).toEqual("Black wins - straight flush with high card: Jack");
+      ).toEqual("Hand #1 wins - straight flush with high card: Jack");
     });
   });
 });

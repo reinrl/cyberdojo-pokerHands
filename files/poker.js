@@ -65,8 +65,8 @@ function parseHands(rawInput) {
   );
 
   return {
-    black: { cards: blackHand, name: "Black", score: scoreHand(blackHand) },
-    white: { cards: whiteHand, name: "White", score: scoreHand(whiteHand) },
+    black: { cards: blackHand, id: 1, score: scoreHand(blackHand) },
+    white: { cards: whiteHand, id: 2, score: scoreHand(whiteHand) },
   };
 }
 
@@ -89,7 +89,7 @@ function playTheHands(rawInput) {
       hands.black.score < hands.white.score ? hands.black : hands.white;
 
     // somebody has a hand!
-    return `${winningHand.name} wins - ${rankedHands[winningHand.score].name}`;
+    return `Hand #${winningHand.id} wins - ${rankedHands[winningHand.score].name}`;
   }
 }
 
