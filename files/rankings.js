@@ -47,54 +47,63 @@ const rankedCards = [
 // rank the hands to give them a relative value
 const rankedHands = [
   {
+    baseScore: 90000000000,
     name: "straight flush",
     value: "straightFlush",
     handScoringFunc: isStraightFlush,
     tieBreakerFunc: breakStraightFlushTie,
   },
   {
+    baseScore: 80000000000,
     name: "four of a kind",
     value: "fourOfAKind",
     handScoringFunc: isFourOfAKind,
     tieBreakerFunc: breakAFourOfAKindTie,
   },
   {
+    baseScore: 70000000000,
     name: "full house",
     value: "fullHouse",
     handScoringFunc: isFullHouse,
     tieBreakerFunc: breakFullHouseTie,
   },
   {
+    baseScore: 60000000000,
     name: "flush",
     value: "flush",
     handScoringFunc: isFlush,
     tieBreakerFunc: breakFlushTie,
   },
   {
+    baseScore: 50000000000,
     name: "straight",
     value: "straight",
     handScoringFunc: isStraight,
     tieBreakerFunc: breakStraightTie,
   },
   {
+    baseScore: 40000000000,
     name: "three of a kind",
     value: "threeOfAKind",
     handScoringFunc: isThreeOfAKind,
     tieBreakerFunc: breakAThreeOfAKindTie,
   },
   {
+    baseScore: 30000000000,
     name: "two pairs",
     value: "twoPairs",
     handScoringFunc: isTwoPairs,
     tieBreakerFunc: breakTwoPairsTie,
   },
   {
+    baseScore: 20000000000,
     name: "pair",
     value: "pair",
     handScoringFunc: isPair,
     tieBreakerFunc: breakAPairTie,
   },
   {
+    baseScore: 10000000000,
     name: "high card",
     value: "highCard",
     handScoringFunc: () => true,
