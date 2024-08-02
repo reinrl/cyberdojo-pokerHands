@@ -7,21 +7,10 @@ const { rankedCards, rankedHands } = require("./rankings");
 // Figure out what we are working with //
 /////////////////////////////////////////
 function parseHands(rawInput) {
-  function nthIndex(str, pat, n) {
-    let i = -1;
-    while (n-- && i++ < str.length) {
-      i = str.indexOf(pat, i);
-      if (i < 0) break;
-    }
-    return i;
-  }
-
   const parseHand = (rawHandInput) =>
-    // NOTE: we are going to assume that the raw hand comes in as "color: #S #S #S #S #S"
+    // NOTE: we are going to assume that the raw hand comes in as "#S #S #S #S #S"
     rawHandInput
       .split(" ")
-      // get rid of the hand color at the start of the string
-      .slice(1)
       // separate the suit and value into distinct entities
       .map((card) => ({
         suit: card[card.length - 1],
@@ -68,12 +57,12 @@ function parseHands(rawInput) {
     return score;
   };
 
-  // NOTE: we are going to assume that the raw hands come in as "black: #S #S #S #S #S white: #S #S #S #S #S"
+  // NOTE: we are going to assume that the raw hands come in as ["#S #S #S #S #S", "#S #S #S #S #S"]
   const blackHand = parseHand(
-    rawInput.substring(0, nthIndex(rawInput, " ", 6))
+    rawInput[0]
   );
   const whiteHand = parseHand(
-    rawInput.substring(nthIndex(rawInput, " ", 6) + 1)
+    rawInput[1]
   );
 
   return {
